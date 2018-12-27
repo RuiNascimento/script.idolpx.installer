@@ -3,7 +3,7 @@
 import xbmc, xbmcgui
 import os, sys, json, time
 
-from libs import requests
+import requests
 from libs import kodi
 import installer
 

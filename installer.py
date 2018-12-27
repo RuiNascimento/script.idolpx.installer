@@ -3,7 +3,7 @@
 import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 import sys, os, time, shutil, zipfile, hashlib, glob, json
 
-from libs import requests
+import requests
 from libs import kodi
 
 window = xbmcgui.Window(10000)
