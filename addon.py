@@ -1,4 +1,4 @@
-"""idolpx Installer"""
+"""kbuilds Installer"""
 
 import xbmc, xbmcgui
 import os, sys, json, time
@@ -9,7 +9,7 @@ import installer
 
 def main():
     dp = xbmcgui.DialogProgress()
-    dp.create('idolpx Installer', 
+    dp.create('kbuilds Installer', 
             'Checking for update...', 
             '', 
             'Please wait...')
@@ -77,7 +77,7 @@ def main():
         # Prompt for Kodi Update
         if kodi.get_setting('update_kodi') == 'true':
             if kodi.platform() == 'android' and remote['kodi_version'] != kodi.get_version():
-                choice = xbmcgui.Dialog().yesno('idolpx Installer',
+                choice = xbmcgui.Dialog().yesno('kbuilds Installer',
                                                 'A new version of Kodi is available!',
                                                 'Current version is [B]'+kodi.get_version()+'[/B].[CR]',
                                                 'Would you like to install version [B]'+remote['kodi_version'] +'[/B]?')
@@ -88,18 +88,18 @@ def main():
         if os.path.exists(update_file):
             url = '/update.zip'
             hash = ''
-            choice = xbmcgui.Dialog().yesno('idolpx Installer', 
+            choice = xbmcgui.Dialog().yesno('kbuilds Installer', 
                                                 'An update file exists!',
                                                 '',
                                                 'Would you like to install this update?')
         else:
             if remote_version != current_version:
-                choice = xbmcgui.Dialog().yesno('idolpx Installer', 
+                choice = xbmcgui.Dialog().yesno('kbuilds Installer', 
                                                 'A new configuration is available!',
                                                 'Current version is [B]'+current_version+'[/B].[CR]',
                                                 'Would you like to install version [COLOR green][B]'+remote_version+'[/B][/COLOR]?')
             else:
-                choice = xbmcgui.Dialog().yesno('idolpx Installer', 
+                choice = xbmcgui.Dialog().yesno('kbuilds Installer', 
                                                 'Current version is [B]'+current_version+'[/B].[CR]',
                                                 'Would you like to reinstall version [B]'+remote_version+'[/B]?')
 
@@ -113,16 +113,16 @@ def main():
                 with open(version_file, "w") as outfile:
                     json.dump(remote, outfile)
 
-                choice = xbmcgui.Dialog().yesno('idolpx Installer', 
+                choice = xbmcgui.Dialog().yesno('kbuilds Installer', 
                                                 'A restart is required. Would you like to restart Kodi now?')
                 if choice == 1:
                     kodi.kill()
 
-                xbmcgui.Dialog().ok('idolpx Installer', 
+                xbmcgui.Dialog().ok('kbuilds Installer', 
                                     'Update checks complete!')
             else:
 
-                xbmcgui.Dialog().ok('idolpx Installer', 
+                xbmcgui.Dialog().ok('kbuilds Installer', 
                                     'Update canelled!')
                                      
                 
@@ -132,7 +132,7 @@ def main():
 
 def backup():
     choice = xbmcgui.Dialog().yesno(
-                'idolpx Installer', 
+                'kbuilds Installer', 
                 'Backup Current Configuration?'
             )
     if choice == 1:
@@ -142,10 +142,10 @@ def backup():
 if __name__ == '__main__':
     #import web_pdb; web_pdb.set_trace()
     window = xbmcgui.Window(10000)
-    if window.getProperty('idolpx.installer.running') == 'true':
+    if window.getProperty('kbuilds.installer.running') == 'true':
         kodi.log('Addon is already running. Exiting...')
     else:
-        window.setProperty('idolpx.installer.running', 'true')
+        window.setProperty('kbuilds.installer.running', 'true')
 
         arg = None
         try: arg = sys.argv[1].lower()
@@ -156,5 +156,5 @@ if __name__ == '__main__':
         else:
             main()
 
-        window.clearProperty('idolpx.installer.running')
+        window.clearProperty('kbuilds.installer.running')
 

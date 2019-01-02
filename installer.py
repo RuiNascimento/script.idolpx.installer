@@ -1,4 +1,4 @@
-# kodi.idolpx.com
+# kodi.kbuilds.com
 
 import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 import sys, os, time, shutil, zipfile, hashlib, glob, json
@@ -23,7 +23,7 @@ def installConfig(url, hash=None):
     destination_file = os.path.join(path, filename)
 
     # Download File
-    dp.create('idolpx Installer',
+    dp.create('kbuilds Installer',
               'Downloading: '+filename,
               '',
               'Please wait...')
@@ -108,7 +108,7 @@ def installConfig(url, hash=None):
                 break
 
             else:
-                choice = xbmcgui.Dialog().yesno('idolpx Installer',
+                choice = xbmcgui.Dialog().yesno('kbuilds Installer',
                                                 'File Validation Failed!',
                                                 '',
                                                 'Would you like to retry?')
@@ -117,7 +117,7 @@ def installConfig(url, hash=None):
                     break
 
         else:
-            choice = xbmcgui.Dialog().yesno('idolpx Installer',
+            choice = xbmcgui.Dialog().yesno('kbuilds Installer',
                                             'Transfer incomplete!',
                                             '',
                                             'Would you like to retry?')
@@ -167,7 +167,7 @@ def createConfig():
                        'Textures13.db', 'MyMusic', 'MyVideos']
 
     # Download File
-    dp.create('idolpx Installer', 
+    dp.create('kbuilds Installer', 
               'Creating Backup: '+destination_file, 
               '', 
               'Please wait...')
@@ -175,14 +175,14 @@ def createConfig():
     if zip(source, path + destination_file, exclusions):
         validate_file(path + destination_file, "MD5")
         xbmcgui.Dialog().ok(
-            'idolpx Installer',
+            'kbuilds Installer',
             '[COLOR green]Backup Successful![/COLOR]',
             '',
             '[B]'+destination_file+'[/B]'
         )
     else:
         xbmcgui.Dialog().ok(
-            'idolpx Installer',
+            'kbuilds Installer',
             '[COLOR red]Backup Error![/COLOR]',
             '',
             '[B]'+destination_file+'[/B]'
@@ -197,7 +197,7 @@ def installAPK(url):
 
 
     # Download File
-    dp.create('idolpx Installer', 
+    dp.create('kbuilds Installer', 
             'Downloading: '+filename, 
             '', 
             'Please wait...')
@@ -217,7 +217,7 @@ def installAPK(url):
             return True
             break
         else:
-            choice = xbmcgui.Dialog().yesno('idolpx Installer',
+            choice = xbmcgui.Dialog().yesno('kbuilds Installer',
                                 'Transfer incomplete!',
                                 '',
                                 'Would you like to retry?')
@@ -345,7 +345,7 @@ def _download_progress(filename, bytes_received, bytes_total):
 
 def _download_background(filename, bytes_received, bytes_total):
     percent = min((bytes_received * 100) / bytes_total, 100)
-    if kodi.isPlaying() or window.getProperty('idolpx.installer.running') == 'true': # kodi.get_setting('isrunning') == 'true':
+    if kodi.isPlaying() or window.getProperty('kbuilds.installer.running') == 'true': # kodi.get_setting('isrunning') == 'true':
         return -1
     else:
         return percent
