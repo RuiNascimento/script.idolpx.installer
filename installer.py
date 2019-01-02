@@ -251,6 +251,7 @@ def validate_file(file_path, hash):
     return m.hexdigest() == hash
 
 def download_with_resume(url, file_path, callback=None, hash=None, timeout=10):
+    import web_pdb; web_pdb.set_trace()
     """
     Performs a HTTP(S) download that can be restarted if prematurely terminated.
     The HTTP server must support byte ranges.
@@ -274,7 +275,7 @@ def download_with_resume(url, file_path, callback=None, hash=None, timeout=10):
         file_mode = 'ab' if first_byte else 'wb'
         file_size = -1
 
-        file_size = int(requests.head(url).headers['Content-length'])
+        file_size = int(requests.get(url, stream=True).headers.get('content-length'))
         kodi.log('File size is %s' % file_size)
         kodi.log('Starting at %s' % first_byte)
         kodi.log('File Mode %s' % file_mode)
@@ -286,7 +287,7 @@ def download_with_resume(url, file_path, callback=None, hash=None, timeout=10):
             first_byte = 0
 
         headers = {"Range": "bytes=%s-" % first_byte}
-        r = requests.get(url, headers=headers, stream=True)
+        r = requests.get(url, stream=True)
         with open(tmp_file_path, file_mode) as f:
             for chunk in r.iter_content(chunk_size=block_size): 
                 if chunk: # filter out keep-alive new chunks
