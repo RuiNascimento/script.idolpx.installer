@@ -23,7 +23,7 @@ def installConfig(url, hash=None):
     destination_file = os.path.join(path, filename)
 
     # Download File
-    dp.create('kbuilds Installer',
+    dp.create('KBuilds Installer',
               'Downloading: '+filename,
               '',
               'Please wait...')
@@ -108,7 +108,7 @@ def installConfig(url, hash=None):
                 break
 
             else:
-                choice = xbmcgui.Dialog().yesno('kbuilds Installer',
+                choice = xbmcgui.Dialog().yesno('KBuilds Installer',
                                                 'File Validation Failed!',
                                                 '',
                                                 'Would you like to retry?')
@@ -117,7 +117,7 @@ def installConfig(url, hash=None):
                     break
 
         else:
-            choice = xbmcgui.Dialog().yesno('kbuilds Installer',
+            choice = xbmcgui.Dialog().yesno('KBuilds Installer',
                                             'Transfer incomplete!',
                                             '',
                                             'Would you like to retry?')
@@ -135,7 +135,7 @@ def createConfig():
     destination_file = 'kodi.'+time.strftime("%Y%m%d_%H%M")+'.zip'
     
     # Update version.json file
-    current = json.loads('{"config_version": "'+version+'","test_version": "'+version+'"}')
+    current = json.loads('{"config_version": "'+version+'"}')
     version_path = xbmc.translatePath(os.path.join('special://', 'userdata'))
     version_file = version_path+'version.json'
     with open(version_file, "w") as outfile:
@@ -167,7 +167,7 @@ def createConfig():
                        'Textures13.db', 'MyMusic', 'MyVideos']
 
     # Download File
-    dp.create('kbuilds Installer', 
+    dp.create('KBuilds Installer', 
               'Creating Backup: '+destination_file, 
               '', 
               'Please wait...')
@@ -175,14 +175,14 @@ def createConfig():
     if zip(source, path + destination_file, exclusions):
         validate_file(path + destination_file, "MD5")
         xbmcgui.Dialog().ok(
-            'kbuilds Installer',
+            'KBuilds Installer',
             '[COLOR green]Backup Successful![/COLOR]',
             '',
             '[B]'+destination_file+'[/B]'
         )
     else:
         xbmcgui.Dialog().ok(
-            'kbuilds Installer',
+            'KBuilds Installer',
             '[COLOR red]Backup Error![/COLOR]',
             '',
             '[B]'+destination_file+'[/B]'
@@ -197,7 +197,7 @@ def installAPK(url):
 
 
     # Download File
-    dp.create('kbuilds Installer', 
+    dp.create('KBuilds Installer', 
             'Downloading: '+filename, 
             '', 
             'Please wait...')
@@ -217,7 +217,7 @@ def installAPK(url):
             return True
             break
         else:
-            choice = xbmcgui.Dialog().yesno('kbuilds Installer',
+            choice = xbmcgui.Dialog().yesno('KBuilds Installer',
                                 'Transfer incomplete!',
                                 '',
                                 'Would you like to retry?')
@@ -251,7 +251,6 @@ def validate_file(file_path, hash):
     return m.hexdigest() == hash
 
 def download_with_resume(url, file_path, callback=None, hash=None, timeout=10):
-    import web_pdb; web_pdb.set_trace()
     """
     Performs a HTTP(S) download that can be restarted if prematurely terminated.
     The HTTP server must support byte ranges.
@@ -316,9 +315,14 @@ def download_with_resume(url, file_path, callback=None, hash=None, timeout=10):
         return False
 
     finally:
+
+
         # rename the temp download file to the correct name if fully downloaded
         if file_size == os.path.getsize(tmp_file_path):
             # if there's a hash value, validate the file
+            dp.update(100, "Verifying MD5 HASH: "+filename, 
+                '', 
+                'Please wait...')
             if hash and not validate_file(tmp_file_path, hash):
                 raise Exception('Error validating the file against its MD5 hash')
                 return False

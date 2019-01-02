@@ -9,7 +9,7 @@ import installer
 
 def main():
     dp = xbmcgui.DialogProgress()
-    dp.create('kbuilds Installer', 
+    dp.create('KBuilds Installer', 
             'Checking for update...', 
             '', 
             'Please wait...')
@@ -46,11 +46,11 @@ def main():
         #         return
 
         # Prompt for Configuration Update
-        if kodi.get_setting('update_test') != 'true':
-            current_version = current['config_version']
-        else:
-            current_version = current['test_version']
-
+        # if kodi.get_setting('update_test') != 'true':
+        #     current_version = current['config_version']
+        # else:
+        #     current_version = current['test_version']
+        current_version = current['config_version']
         # params = {
         #             'd': kodi.getInfoLabel('Network.MacAddress'),
         #             'os': kodi.getInfoLabel('System.OSVersionInfo'),
@@ -81,7 +81,7 @@ def main():
         # Prompt for Kodi Update
         # if kodi.get_setting('update_kodi') == 'true':
         #     if kodi.platform() == 'android' and remote['kodi_version'] != kodi.get_version():
-        #         choice = xbmcgui.Dialog().yesno('kbuilds Installer',
+        #         choice = xbmcgui.Dialog().yesno('KBuilds Installer',
         #                                         'A new version of Kodi is available!',
         #                                         'Current version is [B]'+kodi.get_version()+'[/B].[CR]',
         #                                         'Would you like to install version [B]'+remote['kodi_version'] +'[/B]?')
@@ -117,17 +117,17 @@ def main():
                 with open(version_file, "w") as outfile:
                     json.dump(remote, outfile)
 
-                choice = xbmcgui.Dialog().yesno('kbuilds Installer', 
+                choice = xbmcgui.Dialog().yesno('KBuilds Installer', 
                                                 'A restart is required. Would you like to restart Kodi now?')
                 if choice == 1:
                     kodi.kill()
 
-                xbmcgui.Dialog().ok('kbuilds Installer', 
+                xbmcgui.Dialog().ok('KBuilds Installer', 
                                     'Update checks complete!')
             else:
 
-                xbmcgui.Dialog().ok('kbuilds Installer', 
-                                    'Update canelled!')
+                xbmcgui.Dialog().ok('KBuilds Installer', 
+                                    'Update cancelled!')
                                      
                 
     except Exception, e: 
@@ -136,7 +136,7 @@ def main():
 
 def backup():
     choice = xbmcgui.Dialog().yesno(
-                'kbuilds Installer', 
+                'KBuilds Installer', 
                 'Backup Current Configuration?'
             )
     if choice == 1:
