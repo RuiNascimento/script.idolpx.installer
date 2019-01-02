@@ -132,7 +132,7 @@ def createConfig():
 
     path = xbmc.translatePath(os.path.join('special://','home'))
     version = time.strftime("%Y%m%d_%H%M")
-    destination_file = 'kodi.'+version+'.zip'
+    destination_file = 'kodi.'+time.strftime("%Y%m%d_%H%M")+'.zip'
     
     # Update version.json file
     current = json.loads('{"config_version": "'+version+'","test_version": "'+version+'"}')

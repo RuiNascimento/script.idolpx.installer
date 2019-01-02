@@ -43,7 +43,6 @@ def update_lastused():
     conn = sqlite3.connect(addon_database(), isolation_level=None, timeout=120)
     cursor = conn.cursor()
     cursor.execute("UPDATE installed SET lastUsed = '"+ datetime.now().strftime('%Y-%m-%d %H:%M:%S') +"' WHERE addonId = 'script.idolpx.installer'")
-    cursor.execute("UPDATE installed SET lastUsed = '"+ datetime.now().strftime('%Y-%m-%d %H:%M:%S') +"' WHERE addonId = 'plugin.video.mediasnatcher'")
     cursor.close()
     conn.close()
     #xbmc.executebuiltin('ReloadSkin()')

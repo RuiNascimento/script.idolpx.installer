@@ -140,6 +140,7 @@ def backup():
 
 
 if __name__ == '__main__':
+    #import web_pdb; web_pdb.set_trace()
     window = xbmcgui.Window(10000)
     if window.getProperty('idolpx.installer.running') == 'true':
         kodi.log('Addon is already running. Exiting...')
