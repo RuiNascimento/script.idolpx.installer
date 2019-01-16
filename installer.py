@@ -153,8 +153,9 @@ def installConfig(url, hash=None):
 def createConfig():
     
     #Fix_Special:
+    USERDATA     =  xbmc.translatePath(os.path.join('special://home/userdata',''))
     if kodi.get_setting('fix_special') == 'true':
-                    try: FIX_SPECIAL(path)
+                    try: FIX_SPECIAL(USERDATA)
                     except: pass
     
     source = [xbmc.translatePath(os.path.join('special://home', 'addons'))]
