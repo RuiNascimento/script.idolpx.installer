@@ -64,7 +64,7 @@ def main():
 
         kodi.log('Config URL: '+kodi.get_setting('update_url'))
         response = requests.get(kodi.get_setting('update_url'))
-
+        remote = json.loads(response.text)
         if kodi.platform() == 'raspberry':
             kodi.log('Detected Platform = Raspberry Pi')
             remote_version = remote.get('raspberry')['config_version']
@@ -76,7 +76,7 @@ def main():
             url = remote.get('windows')['config_url']
             hash = remote.get('windows')['config_md5']
 
-        #remote = json.loads(response.text)
+        
         #kodi.log(json.dumps(remote))
         dp.close()
 
