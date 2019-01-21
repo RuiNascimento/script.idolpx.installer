@@ -59,10 +59,25 @@ def main():
         #         }
 
         # params['cv'] = current_version
+
+
+
         kodi.log('Config URL: '+kodi.get_setting('update_url'))
         response = requests.get(kodi.get_setting('update_url'))
-        remote = json.loads(response.text)
-        kodi.log(json.dumps(remote))
+
+        if kodi.platform() == 'raspberry':
+            kodi.log('Detected Platform = Raspberry Pi')
+            remote_version = remote.get('raspberry')['config_version']
+            url = remote.get('raspberry')['config_url']
+            hash = remote.get('raspberry')['config_md5']
+        else:
+            kodi.log('Detected Platform = Other; Using Windows Config')
+            remote_version = remote.get('windows')['config_version']
+            url = remote.get('windows')['config_url']
+            hash = remote.get('windows')['config_md5']
+
+        #remote = json.loads(response.text)
+        #kodi.log(json.dumps(remote))
         dp.close()
 
         # if kodi.get_setting('update_test') != 'true':
@@ -74,9 +89,9 @@ def main():
         #     url = remote['test_url']
         #     hash = remote['test_md5']
 
-        remote_version = remote['config_version']
-        url = remote['config_url']
-        hash = remote['config_md5']
+        # remote_version = remote['config_version']
+        # url = remote['config_url']
+        # hash = remote['config_md5']
 
         # Prompt for Kodi Update
         # if kodi.get_setting('update_kodi') == 'true':

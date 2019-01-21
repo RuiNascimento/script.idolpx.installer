@@ -14,8 +14,7 @@
 		<setting id="showadult" type="bool" label="Show Adult Content" default="false" visible="false"/>
 	</category>
 	<category label="Advanced">
-		<setting id="update_url" type="text" label="Update URL" default="https://raw.githubusercontent.com/RuiNascimento/krepo/master/version.php"/>
-		<setting id="update_test" type="bool" label="Select Test Configuration" default="false"/>
+		<setting id="update_url" type="text" label="Update URL" default="https://raw.githubusercontent.com/RuiNascimento/krepo/master/version.json"/>
 		<setting type="sep"/>
 		<setting id="backup" type="action" label="Backup Current Configuration" action="RunScript(script.kbuilds.installer,backup)"/>
 	</category>

@@ -111,13 +111,17 @@ if __name__ == '__main__':
                 # else:
                 #     remote_version = remote['test_version']
                 #     url = remote['test_url']
-
-                remote_version = remote['config_version']
-                url = remote['config_url']
+                if kodi.platform() == 'raspberry':
+                    remote_version = remote.get('raspberry')['config_version']
+                    url = remote.get('raspberry')['config_url']
+                else:
+                    remote_version = remote.get('windows')['config_version']
+                    url = remote.get('windows')['config_url']
 
 
                 # If config version is different on server then execute installer
                 if current_version != remote_version:
+                    kodi.log(str(kodi.platform()))
                     kodi.log("New confguration version available.")
 
                     # Setup variables

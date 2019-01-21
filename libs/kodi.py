@@ -447,6 +447,8 @@ def kill():
 def platform():
     if xbmc.getCondVisibility('system.platform.android'):
         return 'android'
+    elif xbmc.getCondVisibility('System.Platform.Linux.RaspberryPi'):
+        return 'raspberry'
     elif xbmc.getCondVisibility('system.platform.linux'):
         return 'linux'
     elif xbmc.getCondVisibility('system.platform.windows'):
